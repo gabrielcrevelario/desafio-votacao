@@ -1,15 +1,10 @@
 package com.desafiovotacao.desafiovotacao.controller;
 
-import com.desafiovotacao.desafiovotacao.entities.Pauta;
 import com.desafiovotacao.desafiovotacao.entities.Usuario;
-import com.desafiovotacao.desafiovotacao.entities.VotoUser;
-import com.desafiovotacao.desafiovotacao.repositories.TesteRepository;
-import com.desafiovotacao.desafiovotacao.services.PautaService;
 import com.desafiovotacao.desafiovotacao.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

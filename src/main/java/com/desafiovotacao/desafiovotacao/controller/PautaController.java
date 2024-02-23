@@ -1,8 +1,6 @@
 package com.desafiovotacao.desafiovotacao.controller;
 
 import com.desafiovotacao.desafiovotacao.entities.Pauta;
-import com.desafiovotacao.desafiovotacao.entities.VotoUser;
-import com.desafiovotacao.desafiovotacao.repositories.TesteRepository;
 import com.desafiovotacao.desafiovotacao.services.PautaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +15,6 @@ import reactor.core.publisher.Mono;
 public class PautaController {
     @Autowired
     private PautaService pautaService;
-    @Autowired
-    private TesteRepository testeRepository;
     @GetMapping
     public Flux<Pauta> findAllPautas() {
         return pautaService.findAllPautas();
