@@ -1,6 +1,6 @@
-package com.desafiovotacao.desafiovotacao.domain.repositories;
+package com.desafiovotacao.desafiovotacao.repositories;
 
-import com.desafiovotacao.desafiovotacao.domain.entities.Voto;
+import com.desafiovotacao.desafiovotacao.entities.Voto;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 
