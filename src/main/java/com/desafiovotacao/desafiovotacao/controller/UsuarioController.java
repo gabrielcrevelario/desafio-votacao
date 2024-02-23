@@ -1,9 +1,11 @@
 package com.desafiovotacao.desafiovotacao.controller;
 
 import com.desafiovotacao.desafiovotacao.entities.Pauta;
+import com.desafiovotacao.desafiovotacao.entities.Usuario;
 import com.desafiovotacao.desafiovotacao.entities.VotoUser;
 import com.desafiovotacao.desafiovotacao.repositories.TesteRepository;
 import com.desafiovotacao.desafiovotacao.services.PautaService;
+import com.desafiovotacao.desafiovotacao.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,38 +15,29 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/pautas")
-public class PautaController {
+@RequestMapping("/usuarios")
+public class UsuarioController {
     @Autowired
-    private PautaService pautaService;
-    @Autowired
-    private TesteRepository testeRepository;
+    private UsuarioService usuarioService;
     @GetMapping
-    public Flux<Pauta> findAllPautas() {
-        return pautaService.findAllPautas();
+    public Flux<Usuario> findAllUsuarios() {
+        return usuarioService.findAll();
     }
-    @GetMapping("/teste")
-    public  Flux<ResponseEntity<VotoUser>> getTeste() {
-        return testeRepository.findAll().map(t -> ResponseEntity.ok(t));
-    }
-    @GetMapping("/pautaId/{id}")
-    public Mono<ResponseEntity<Pauta>> getPautaById(@PathVariable String id) {
-       return pautaService.findPautabyId(id).map(p -> ResponseEntity.ok(p))
+
+    @GetMapping("/usuarioId/{id}")
+    public Mono<ResponseEntity<Usuario>> getUsuarioById(@PathVariable String id) {
+       return usuarioService.findById(id).map(ResponseEntity::ok)
                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Pauta> createPauta(@RequestBody Pauta pauta) {
-        return pautaService.create(pauta);
+    public Mono<Usuario> createUsuario(@RequestBody Usuario usuario) {
+        return usuarioService.CreateOrUpdate(usuario);
     }
-    @PutMapping("/{id}")
-    public Mono<ResponseEntity<Pauta>> updatePauta(@PathVariable("id") String id, @RequestBody Pauta pauta) {
-        return pautaService.update(id, pauta)
-                .map(updatedPauta -> ResponseEntity.ok(updatedPauta))
+    @GetMapping("/cpf/{cpf}")
+    public Mono<ResponseEntity<Usuario>> findByCpf(@PathVariable("cpf") String cpf) {
+        return usuarioService.findByCpf(cpf)
+                .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());
-    }
-    @Scheduled(fixedRate = 1000)
-    public Flux<Pauta> verifyPautas() {
-       return pautaService.verifyPautasIsActive();
     }
 }

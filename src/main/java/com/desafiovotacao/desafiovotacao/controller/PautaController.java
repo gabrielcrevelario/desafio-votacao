@@ -1,8 +1,8 @@
-package com.desafiovotacao.desafiovotacao.presentation.controller;
+package com.desafiovotacao.desafiovotacao.controller;
 
-import com.desafiovotacao.desafiovotacao.domain.entities.Pauta;
-import com.desafiovotacao.desafiovotacao.domain.entities.Teste;
-import com.desafiovotacao.desafiovotacao.domain.repositories.TesteRepository;
+import com.desafiovotacao.desafiovotacao.entities.Pauta;
+import com.desafiovotacao.desafiovotacao.entities.VotoUser;
+import com.desafiovotacao.desafiovotacao.repositories.TesteRepository;
 import com.desafiovotacao.desafiovotacao.services.PautaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,11 +23,7 @@ public class PautaController {
     public Flux<Pauta> findAllPautas() {
         return pautaService.findAllPautas();
     }
-    @GetMapping("/teste")
-    public  Flux<ResponseEntity<Teste>> getTeste() {
-        return testeRepository.findAll().map(t -> ResponseEntity.ok(t));
-    }
-    @GetMapping("/{id}")
+    @GetMapping("/pautaId/{id}")
     public Mono<ResponseEntity<Pauta>> getPautaById(@PathVariable String id) {
        return pautaService.findPautabyId(id).map(p -> ResponseEntity.ok(p))
                .defaultIfEmpty(ResponseEntity.notFound().build());

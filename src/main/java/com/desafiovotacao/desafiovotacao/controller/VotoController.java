@@ -1,7 +1,9 @@
-package com.desafiovotacao.desafiovotacao.presentation.controller;
+package com.desafiovotacao.desafiovotacao.controller;
 
-import com.desafiovotacao.desafiovotacao.domain.entities.Pauta;
-import com.desafiovotacao.desafiovotacao.domain.entities.Voto;
+import com.desafiovotacao.desafiovotacao.entities.Pauta;
+import com.desafiovotacao.desafiovotacao.entities.Voto;
+import com.desafiovotacao.desafiovotacao.entities.VotoUser;
+import com.desafiovotacao.desafiovotacao.services.PautaService;
 import com.desafiovotacao.desafiovotacao.services.VotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,10 +17,10 @@ import reactor.core.publisher.Mono;
 public class VotoController {
     @Autowired
     private VotoService votoService;
-    @PostMapping("/id/{pautaId}/cpf/{cpf}/")
+    @PostMapping("/pautaId/{pautaId}/cpf/{cpf}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Pauta> createVoto(@PathVariable  String pautaId,@PathVariable String cpf, @RequestBody Voto voto) throws Exception {
-        return votoService.create(pautaId,cpf, voto);
+    public Mono<Pauta> createVoto(@PathVariable  String pautaId,@PathVariable String cpf, @RequestBody VotoUser voto) throws Exception {
+        return votoService.create(pautaId,cpf, voto.getVotoUser());
     }
     @GetMapping("/id/{pautaId}")
     @ResponseStatus(HttpStatus.OK)
