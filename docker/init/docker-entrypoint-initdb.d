@@ -23,12 +23,12 @@ db.getCollection("pauta").insertOne({
     ],
     "ativated" : true
 })
-db.getCollection("usuario").insertOne({
-   
+    db.getCollection("usuario").insertOne({
     
-     "name":"teste",
-    "cpf":"945.096.810-11",
-    "email":"teste@gmail.com",
-    "password":"123456789"
-})
+        
+        "name":"teste",
+        "cpf":"945.096.810-11",
+        "email":"teste@gmail.com",
+        "password":"123456789"
+    })
 
